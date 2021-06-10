@@ -1,0 +1,24 @@
+{
+  "name": "omni-retail-qaautomation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress open"
+    
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inmdigitalfactory/omni-retail-QaAutomation.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/inmdigitalfactory/omni-retail-QaAutomation/issues"
+  },
+  "homepage": "https://github.com/inmdigitalfactory/omni-retail-QaAutomation#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "cypress": "^5.3.0"
+  }
+}
