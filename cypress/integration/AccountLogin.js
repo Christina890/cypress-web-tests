@@ -17,12 +17,10 @@ describe('Open Retail Omni web',function(){
             return false;
         });
         cy.visit('https://test-dxp.imbank.com/inm-retail/login')
-        //cy.wait(10000);
-        cy.get('input[id="username"]').type('christineapondi')
+        cy.get('input[id="username"]', { timeout: 10000}).type('christineapondi')
         cy.get('input[id="password"]').type('Password1*')
         cy.get('button[id="kc-submit"]').click()
-        //cy.wait(20000);
-        cy.get('h3[aria-level="3"]').should('contain','Christine Onyango')
+        cy.get('h3[aria-level="3"]', { timeout: 10000}).should('contain','Christine Onyango')
 
     })
 });

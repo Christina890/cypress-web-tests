@@ -17,12 +17,15 @@ it('Internal Transfers should be successful',function(){
     Cypress.on('uncaught:exception', (err, runnable) => {
         return false;
     });
-
+   
+    cy.get('#bb-menu-header-button-2',{ timeout: 10000}).click()
     cy.get('#bb-menu-header-button-2').click()
     cy.contains('Local Payment').click()
     cy.get('input[id="beneficiaryName"]').click()
     cy.wait(5000)
-    cy.get('button[class="bb-grouped-list__item bb-list__item--no-separator dropdown-item"]').eq(0).click();
+    cy.get('div[class="bb-product-selector__item-content"]').click()
+    cy.contains('KES').click()
+    cy.get('button[class="bb-grouped-list__item bb-list__item--no-separator dropdown-item"]').eq(0).click({force: true});
     cy.get('input[id="bb_element_12"]').type(16);
     cy.get('input[id="reference"]').click();
     cy.contains('Insurance').click();
@@ -30,7 +33,7 @@ it('Internal Transfers should be successful',function(){
     cy.wait(2000)
     cy.server();
     cy.route('POST', '/api/payment-order-service/client-api/v2/payment-orders').as('route1');
-    cy.contains('Submit').click()
+    cy.contains('Submit',{ timeout: 60000}).click()
     cy.wait(['@route1'], { responseTimeout: 60000 });
     cy.get('span[class="modal-title"]').should('contain','Payment Successful')
 })

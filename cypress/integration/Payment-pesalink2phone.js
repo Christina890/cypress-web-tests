@@ -18,11 +18,13 @@ it('Pesalink to Phone Payments should successful',function(){
         return false;
     });
 
-    cy.get('#bb-menu-header-button-2').click()
+    cy.get('#bb-menu-header-button-2',{ timeout: 10000}).click()
     cy.contains('PesaLink to Phone').click()
     cy.get('input[id="beneficiaryName"]').click()
     cy.wait(5000)
-    cy.get('button[class="bb-grouped-list__item bb-list__item--no-separator dropdown-item"]').eq(1).click();
+    cy.get('div[class="bb-product-selector__item-content"]').click()
+    cy.contains('KES').click()
+    cy.get('button[class="bb-grouped-list__item bb-list__item--no-separator dropdown-item"]').eq(1).click({force: true});
     cy.get('button[class="bb-load-button btn-primary btn btn-md"]').eq(0).click();
     cy.get('input[id="bankName"]').click()
     cy.wait(10000)
@@ -31,10 +33,9 @@ it('Pesalink to Phone Payments should successful',function(){
     cy.get('input[id="reference"]').click();
     cy.contains('Insurance').click();
     cy.get('button[class="bb-load-button btn-primary btn btn-md"]').eq(1).click()
-    cy.wait(2000)
     cy.server();
     cy.route('POST', '/api/payment-order-service/client-api/v2/payment-orders').as('route1');
-    cy.contains('Submit').click()
+    cy.contains('Submit',{ timeout: 60000}).click()
     cy.wait(['@route1'], { responseTimeout: 60000 });
     cy.get('span[class="modal-title"]').should('contain','Payment Successful')
 })

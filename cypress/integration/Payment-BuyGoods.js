@@ -17,22 +17,19 @@ describe('Buy goods Payments ',function(){
                 return false;
             });
     
-            cy.get('#bb-menu-header-button-2').click()
+            cy.get('#bb-menu-header-button-2',{ timeout: 10000}).click()
             cy.contains('Mobile Payments').click()
             cy.contains('Buy Goods').click()
             cy.wait(5000)
-            //cy.contains('Select an account').click()
-            //cy.get('button[class="dropdown-item p-0"]').eq(0).click()
+            cy.get('div[class="bb-product-selector__item-content"]').click()
+            cy.contains('KES').click()
             cy.get('input[id="beneficiaryName"]').click()
             cy.get('button[class="bb-grouped-list__item bb-list__item--no-separator dropdown-item"]').eq(0).click();
             cy.get('input[id="bb_element_12"]').type(12);
-            //cy.contains('Next').click()
-            //cy.wait(5000)
             cy.get('button[class="bb-load-button btn-primary btn btn-md"]').click()
-            cy.wait(10000)
             cy.server();
             cy.route('POST', '/api/payment-order-service/client-api/v2/payment-orders').as('route1');
-            cy.contains('Submit').click()
+            cy.contains('Submit',{ timeout: 60000}).click()
             cy.wait(['@route1'], { responseTimeout: 200000 });
             cy.get('span[class="modal-title"]').should('contain','Payment Successful')
         })
