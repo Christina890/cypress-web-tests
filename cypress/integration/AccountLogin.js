@@ -16,11 +16,11 @@ describe('Open Retail Omni web',function(){
         Cypress.on('uncaught:exception', (err, runnable) => {
             return false;
         });
-        cy.visit('https://test-dxp.imbank.com/inm-retail/login')
-        cy.get('input[id="username"]', { timeout: 10000}).type('christineapondi')
-        cy.get('input[id="password"]').type('Password1*')
+        cy.visit('/')
+        cy.get('input[id="username"]', { timeout: 10000}).type(this.Login.userName)
+        cy.get('input[id="password"]').type(this.Login.password)
         cy.get('button[id="kc-submit"]').click()
-        cy.get('h3[aria-level="3"]', { timeout: 10000}).should('contain','Christine Onyango')
+        cy.get('h3[aria-level="3"]', { timeout: 60000}).should('contain',this.Login.name)
 
     })
 });

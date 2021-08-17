@@ -1,8 +1,8 @@
+{
+    "pageLoadTimeout": 100000,
+    "projectId": "n389tz",
+    "baseUrl":"https://test-dxp.imbank.com/inm-retail/login"
 
-    {
-      "pageLoadTimeout": 100000,
-        "projectId": "n389tz"
-
-      }
-      
+    }
+    
 

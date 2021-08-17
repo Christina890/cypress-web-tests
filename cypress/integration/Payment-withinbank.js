@@ -1,30 +1,34 @@
 
 describe('Internal Transfers',function(){
+    beforeEach(function() {
+        cy.fixture('Login').then((Login)=>{
 
-    beforeEach(() =>{
-        Cypress.on('uncaught:exception', (err, runnable) => {
-            return false;
-        });
-
-        cy.visit('https://test-dxp.imbank.com/inm-retail/login')
-        //cy.wait(10000);
-        cy.get('input[id="username"]').type('christineapondi')
-        cy.get('input[id="password"]').type('Password1*')
-        cy.get('button[id="kc-submit"]').click()
-        cy.wait(20000)         
+            this.Login=Login;
+                
         })
+        cy.fixture('url').then((url)=>{
+
+            this.url=url;
+                
+        })
+    })
+ 
 it('Internal Transfers should be successful',function(){
     Cypress.on('uncaught:exception', (err, runnable) => {
         return false;
     });
-   
-    cy.get('#bb-menu-header-button-2',{ timeout: 10000}).click()
+    cy.visit('/')
+    cy.get('input[id="username"]', { timeout: 10000}).type(this.Login.userName)
+    cy.get('input[id="password"]').type(this.Login.password)
+    cy.get('button[id="kc-submit"]').click()
+    cy.wait(20000)         
+    cy.get('#bb-menu-header-button-2',{ timeout: 60000}).click()
     cy.get('#bb-menu-header-button-2').click()
     cy.contains('Local Payment').click()
     cy.get('input[id="beneficiaryName"]').click()
     cy.wait(5000)
     cy.get('div[class="bb-product-selector__item-content"]').click()
-    cy.contains('KES').click()
+    cy.contains('KES',{ timeout: 60000} ).click()
     cy.get('button[class="bb-grouped-list__item bb-list__item--no-separator dropdown-item"]').eq(0).click({force: true});
     cy.get('input[id="bb_element_12"]').type(16);
     cy.get('input[id="reference"]').click();

@@ -1,23 +1,26 @@
 describe('International Payments',function(){
 
-    beforeEach(() =>{
-        Cypress.on('uncaught:exception', (err, runnable) => {
-            return false;
-        });
+    beforeEach(function() {
+        cy.fixture('Login').then((Login)=>{
 
-        cy.visit('https://test-dxp.imbank.com/inm-retail/login')
-        //cy.wait(10000);
-        cy.get('input[id="username"]').type('christineapondi')
-        cy.get('input[id="password"]').type('Password1*')
-        cy.get('button[id="kc-submit"]').click()
-        //cy.wait(20000)         
+            this.Login=Login;
+                
         })
+        cy.fixture('url').then((url)=>{
+
+            this.url=url;
+                
+        })
+    })
         it('International Transfers should be successful ',function(){
             Cypress.on('uncaught:exception', (err, runnable) => {
                 return false;
             });
-    
-            cy.get('#bb-menu-header-button-2',{ timeout: 20000}).click()
+            cy.visit('/')
+            cy.get('input[id="username"]', { timeout: 10000}).type(this.Login.userName)
+            cy.get('input[id="password"]').type(this.Login.password)
+            cy.get('button[id="kc-submit"]').click()
+            cy.get('#bb-menu-header-button-2',{ timeout: 60000}).click()
             cy.contains('International Payment').click()
             cy.get('div[class="bb-product-selector__item-content"]').click()
             cy.contains('00101748915010', {timeout: 10000} ).click()

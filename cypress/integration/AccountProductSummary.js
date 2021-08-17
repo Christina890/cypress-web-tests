@@ -18,11 +18,11 @@ describe('Get Product Summary',function(){
         });
         cy.server();
         cy.route('GET', '/api/product-summary-presentation-service/client-api/v2/productsummary').as('Products');
-        cy.visit('https://test-dxp.imbank.com/inm-retail/login')
-        cy.get('input[id="username"]', { timeout: 15000}).type('christineapondi')
-        cy.get('input[id="password"]').type('Password1*')
+        cy.visit('/')
+        cy.get('input[id="username"]', { timeout: 10000}).type(this.Login.userName)
+        cy.get('input[id="password"]').type(this.Login.password)
         cy.get('button[id="kc-submit"]').click()
-        cy.wait('@Products',{ timeout: 10000}).its('status').should('eq', 200);
+        cy.wait('@Products',{ timeout: 100000}).its('status').should('eq', 200);
       
 
     })

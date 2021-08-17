@@ -16,13 +16,13 @@ describe('Create a new beneficiary',function(){
         Cypress.on('uncaught:exception', (err, runnable) => {
             return false;
         });
-        cy.visit('https://test-dxp.imbank.com/inm-retail/login')
-        cy.get('input[id="username"]', { timeout: 10000}).type('christineapondi')
-        cy.get('input[id="password"]').type('Password1*')
+        cy.visit('/')
+        cy.get('input[id="username"]', { timeout: 10000}).type(this.Login.userName)
+        cy.get('input[id="password"]').type(this.Login.password)
         cy.get('button[id="kc-submit"]').click()
-        cy.get('bb-icon-ui[class="bb-mega-menu__expand-marker bb-mega-menu__expand-marker--vertical"]').click()
+        cy.contains('Additional Services',{ timeout: 30000}).click()
         cy.contains('Beneficiary Manager').click();
-        cy.contains('Create New').click();
+        cy.contains('Create New', { timeout: 20000}).click();
         cy.contains('Select a transfer type').click();
         cy.contains('Local Payment').click();
         //Random Beneficiary Name

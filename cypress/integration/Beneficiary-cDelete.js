@@ -1,6 +1,4 @@
-
-
-describe('Get Recent Transactions',function(){
+describe('Delete a beneficiary',function(){
 
     beforeEach(function() {
         cy.fixture('Login').then((Login)=>{
@@ -14,20 +12,20 @@ describe('Get Recent Transactions',function(){
                 
         })
     })
-    it('Recent Transactions should be fetched successfully',function(){
+    it('Beneficiary should be deleted successfully',function(){
         Cypress.on('uncaught:exception', (err, runnable) => {
             return false;
         });
-        cy.server();
-        cy.route('GET', 'https://test-dxp.imbank.com/api/transaction-presentation-service/client-api/v2/transactions?arrangementId=8a808bcf772a166601775cf5adda0006').as('Transactions');
         cy.visit('/')
         cy.get('input[id="username"]', { timeout: 10000}).type(this.Login.userName)
         cy.get('input[id="password"]').type(this.Login.password)
         cy.get('button[id="kc-submit"]').click()
-        cy.get('div[class="mt-3 py-1  bb-product-kind"]', { timeout: 100000}).eq(0).click();
-        cy.contains('00101748915010').click();
-        cy.wait('@Transactions',{ timeout: 100000}).its('status').should('eq', 200);
-      
+        cy.contains('Additional Services',{ timeout: 30000}).click()
+        cy.contains('Beneficiary Manager').click();
+        cy.contains('Automation', { timeout: 100000}).click();
+        cy.contains('Delete Beneficiary').click()
+        cy.get('button[aria-label="Delete Beneficiary"').click();
+        cy.get('div[class="bb-notification__body"]').should('contain','Beneficiary has been deleted successfully');
 
     })
 });
