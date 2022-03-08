@@ -1,31 +1,36 @@
-describe('Delete a beneficiary',function(){
+import LoginPage from "./PageObject/LoginPage";
+import APIs from "./PageObject/APIs";
+import Navigation from "./PageObject/Navigation";
+import BeneficiaryPage from "./PageObject/BeneficiaryPage";
+import RandomDataGenerator from "./PageObject/RandomDataGenerator";
 
-    beforeEach(function() {
-        cy.fixture('Login').then((Login)=>{
-
-            this.Login=Login;
-                
-        })
-        cy.fixture('url').then((url)=>{
-
-            this.url=url;
-                
-        })
-    })
-    it('Beneficiary should be deleted successfully',function(){
-        Cypress.on('uncaught:exception', (err, runnable) => {
-            return false;
-        });
-        cy.visit('/')
-        cy.get('input[id="username"]', { timeout: 10000}).type(this.Login.userName)
-        cy.get('input[id="password"]').type(this.Login.password)
-        cy.get('button[id="kc-submit"]').click()
-        cy.contains('Additional Services',{ timeout: 30000}).click()
-        cy.contains('Beneficiary Manager').click();
-        cy.contains('Automation', { timeout: 100000}).click();
-        cy.contains('Delete Beneficiary').click()
-        cy.get('button[aria-label="Delete Beneficiary"').click();
-        cy.get('div[class="bb-notification__body"]').should('contain','Beneficiary has been deleted successfully');
-
-    })
+describe("Delete a beneficiary", function () {
+  beforeEach(function () {
+    cy.fixture("Login").then((Login) => {
+      this.Login = Login;
+    });
+    cy.fixture("url").then((url) => {
+      this.url = url;
+    });
+  });
+  it("Beneficiary should be deleted successfully", function () {
+    const login = new LoginPage();
+    const navigation = new Navigation();
+    const beneficiary = new BeneficiaryPage();
+    Cypress.on("uncaught:exception", (err, runnable) => {
+      return false;
+    });
+    login.navigate();
+    login.enterUsername(this.Login.userName);
+    login.enterPassword(this.Login.password);
+    login.submit();
+    navigation.selectSA();
+    navigation.additionalServices();
+    navigation.beneficiarymanager();
+    beneficiary.DeleteBeneficiary();
+    cy.get('div[class="bb-notification__body"]').should(
+      "contain",
+      "Beneficiary has been deleted successfully"
+    );
+  });
 });

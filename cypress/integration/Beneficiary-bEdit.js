@@ -1,43 +1,37 @@
-describe('Edit Beneficiary',function(){
+import LoginPage from "./PageObject/LoginPage";
+import APIs from "./PageObject/APIs";
+import Navigation from "./PageObject/Navigation";
+import BeneficiaryPage from "./PageObject/BeneficiaryPage";
+import RandomDataGenerator from "./PageObject/RandomDataGenerator";
 
-    beforeEach(function() {
-        cy.fixture('Login').then((Login)=>{
-
-            this.Login=Login;
-                
-        })
-        cy.fixture('url').then((url)=>{
-
-            this.url=url;
-                
-        })
-    })
-    it('Beneficiary should be edited successfully',function(){
-        Cypress.on('uncaught:exception', (err, runnable) => {
-            return false;
-        });
-        cy.visit('/')
-        cy.get('input[id="username"]', { timeout: 10000}).type(this.Login.userName)
-        cy.get('input[id="password"]').type(this.Login.password)
-        cy.get('button[id="kc-submit"]').click()
-        cy.contains('Additional Services',{ timeout: 30000}).click();
-        cy.contains('Beneficiary Manager').click();
-        cy.contains('Automation', { timeout: 100000}).click();
-        cy.contains('Edit Beneficiary').click()
-        const benName = `AutomationEdit`
-        cy.get('input[id="beneficiaryName"]').click().clear().type(benName);
-        const accName = `Account NameEdit`
-        cy.get('input[id="account-name"]').clear().type(accName);
-        //Random Account number
-        cy.contains('Save').click();
-        cy.get('div[class="bb-notification__body"]').should('contain','Beneficiary has been updated successfully');
-       
-
-
-
-
-
-    
-
-    })
+describe("Edit Beneficiary", function () {
+  beforeEach(function () {
+    cy.fixture("Login").then((Login) => {
+      this.Login = Login;
+    });
+    cy.fixture("url").then((url) => {
+      this.url = url;
+    });
+  });
+  it("Beneficiary should be edited successfully", function () {
+    const login = new LoginPage();
+    const navigation = new Navigation();
+    const beneficiary = new BeneficiaryPage();
+    Cypress.on("uncaught:exception", (err, runnable) => {
+      return false;
+    });
+    login.navigate();
+    login.enterUsername(this.Login.userName);
+    login.enterPassword(this.Login.password);
+    login.submit();
+    navigation.selectSA();
+    navigation.additionalServices();
+    navigation.beneficiarymanager();
+    beneficiary.editBeneficiary();
+    beneficiary.SaveBeneficiary();
+    cy.get('div[class="bb-notification__body"]').should(
+      "contain",
+      "Beneficiary has been updated successfully"
+    );
+  });
 });
