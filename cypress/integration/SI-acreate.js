@@ -1,3 +1,10 @@
+import LoginPage from "./PageObject/LoginPage";
+import APIs from "./PageObject/APIs";
+import Navigation from "./PageObject/Navigation";
+import PaymentForm from "./PageObject/PaymentForm";
+import BeneficiaryPage from "./PageObject/BeneficiaryPage";
+import StandingOrder from "./PageObject/StandingOrder";
+
 describe("Create an SI", function () {
   beforeEach(function () {
     cy.fixture("Login").then((Login) => {
@@ -9,51 +16,37 @@ describe("Create an SI", function () {
   });
 
   it("SI should be created successfully", function () {
+    const login = new LoginPage();
+    const navigation = new Navigation();
+    const API = new APIs();
+    const paymentForm = new PaymentForm();
+    const beneficiary = new BeneficiaryPage();
+    const SI = new StandingOrder();
     Cypress.on("uncaught:exception", (err, runnable) => {
       return false;
     });
-    cy.visit("/");
-    cy.get('input[id="username"]', { timeout: 10000 }).type(
-      this.Login.userName
-    );
-    cy.get('input[id="password"]').type(this.Login.password);
-    cy.get('button[id="kc-submit"]').click();
-    cy.get('div[class="agreement__item"]', { timeout: 100000 }).eq(2).click();
-    cy.contains("Additional Services", { timeout: 30000 }).click();
-    cy.contains("Standing Orders").click();
-    cy.contains("Create New", { timeout: 60000 }).click();
-    cy.contains("Mobile Payments").click();
-    cy.contains("Send Money to Mobile").click();
+    login.navigate();
+    login.enterUsername(this.Login.userName);
+    login.enterPassword(this.Login.password);
+    login.submit();
+    navigation.selectSA();
+    navigation.additionalServices();
+    navigation.StandingOrder();
+    beneficiary.CreateNewButton();
+    navigation.MobilePayments();
+    navigation.MobilePayments();
+    navigation.SendMoney();
     cy.wait(5000);
-    cy.get('div[class="bb-product-selector__item-content"]').click();
-    cy.contains("KES").click();
-    cy.get(
-      'button[class="dropdown-toggle btn-outline-secondary btn btn-md"]'
-    ).click();
-    cy.get(
-      'button[class="bb-grouped-list__item bb-list__item--no-separator dropdown-item"]'
-    )
-      .eq(0)
-      .click();
-    cy.get('input[id="bb_element_15"]').type(33000);
-    cy.get(
-      'button[class="bb-input-datepicker__calendar-opener-button btn-link btn btn-md"'
-    ).click();
-    cy.get('div[class="ngb-dp-day ngb-dp-today"]').click();
-    cy.get('select[id="bb_input_11"]').select("Daily");
-    //cy.contains('Daily').click({force: true});
-    cy.get('label[class="bb-input-radio-group__radio btn"]').eq(0).click();
-    cy.contains("Next").click();
+    paymentForm.AccountSelector();
+    paymentForm.SelectBeneficiary();
+    SI.SIAmount();
+    SI.SelectFequencyDaily();
+    SI.SelectEndDateNever();
+    paymentForm.NextButton();
     cy.server();
-    cy.route(
-      "POST",
-      "/api/payment-order-service/client-api/v2/payment-orders"
-    ).as("route1");
-    cy.contains("Submit", { timeout: 60000 }).click();
+    API.PaymentOrder();
+    paymentForm.SubmitPayment();
     cy.wait(["@route1"], { responseTimeout: 200000 });
-    cy.get('span[class="modal-title"]').should(
-      "contain",
-      "Standing Order Successful"
-    );
+    SI.AssertSuccess();
   });
 });

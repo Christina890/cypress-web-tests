@@ -23,6 +23,15 @@ class PaymentForm {
       .eq(0)
       .click();
   }
+  Approve() {
+    cy.get('bb-icon-ui[class="pl-3 pr-3 pb-0"]').eq(0).click();
+  }
+  ConfirmApproval() {
+    cy.contains("Approve").click();
+  }
+  Decline() {
+    cy.get('bb-icon-ui[class="pl-3 pr-3 pb-0"]').eq(1).click();
+  }
   PesalinkBeneficiary() {
     cy.get('input[id="beneficiaryName"]').click();
     cy.get(
@@ -98,6 +107,9 @@ class PaymentForm {
   }
   AssertSuccess() {
     cy.get('span[class="modal-title"]').should("contain", "Payment Successful");
+  }
+  AssertSubmission() {
+    cy.get('span[class="modal-title"]').should("contain", "Payment Submitted");
   }
 }
 export default PaymentForm;

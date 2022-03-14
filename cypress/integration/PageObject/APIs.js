@@ -29,6 +29,12 @@ class API {
       "api/omni-integration-service/client-api/v1/eslip-query?referenceNumber=2020200000003156"
     ).as("eslip");
   }
+  BulkApproval() {
+    cy.route(
+      "POST",
+      "api/payment-order-service/client-api/v2/payment-orders/bulk-approvals"
+    ).as("BulkApproval");
+  }
 }
 
 export default API;

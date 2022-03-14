@@ -2,13 +2,25 @@ class PageNavigation {
   selectSA() {
     cy.contains("Individual accounts", { timeout: 100000 }).click();
   }
+  selectJointSA() {
+    cy.get('div[class="description__container"]').eq(2).click();
+  }
   selectAccount() {
     cy.get('div[class="mb-3 mt-0 py-1  bb-product-kind"]', { timeout: 100000 })
       .eq(0)
       .click();
   }
+  selectApproverSA() {
+    cy.get('div[class="description__container"]').eq(4).click();
+  }
+  ApprovalQueue() {
+    cy.contains("Approval Queue", { timeout: 100000 }).click();
+  }
   additionalServices() {
     cy.contains("Additional Services", { timeout: 100000 }).click();
+  }
+  StandingOrder() {
+    cy.contains("Standing Orders").click();
   }
   beneficiarymanager() {
     cy.contains("Beneficiary Manager").click({ force: true });
