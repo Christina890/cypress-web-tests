@@ -3,7 +3,9 @@ class PageNavigation {
     cy.contains("Individual accounts", { timeout: 100000 }).click();
   }
   selectJointSA() {
-    cy.get('div[class="description__container"]').eq(2).click();
+    cy.get('div[class="description__container"]', { timeout: 10000 })
+      .eq(2)
+      .click();
   }
   selectAccount() {
     cy.get('div[class="mb-3 mt-0 py-1  bb-product-kind"]', { timeout: 100000 })
@@ -60,6 +62,12 @@ class PageNavigation {
   }
   LocalPayments() {
     cy.contains("Local Payment").click();
+  }
+  AccountsOverview() {
+    cy.contains("Accounts & Cards Overview", { timeout: 100000 }).click();
+  }
+  CardsMenu() {
+    cy.get('bb-tab-item[class="nav-item"]', { timeout: 1000 }).eq(1).click();
   }
 }
 

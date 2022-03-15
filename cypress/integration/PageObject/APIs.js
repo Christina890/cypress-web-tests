@@ -35,6 +35,12 @@ class API {
       "api/payment-order-service/client-api/v2/payment-orders/bulk-approvals"
     ).as("BulkApproval");
   }
+  CardSummary() {
+    cy.route(
+      "GET",
+      "api/omni-integration-service/client-api/v1/card-service/cards-summary"
+    ).as("CardSummary");
+  }
 }
 
 export default API;
