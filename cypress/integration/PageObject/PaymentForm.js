@@ -3,7 +3,7 @@ class PaymentForm {
     cy.get('div[class="bb-product-selector__dropdown dropdown"]')
       .trigger("mouseover")
       .click();
-    cy.contains("00101748911250", { timeout: 60000 }).click();
+    cy.contains("00101748911250", { timeout: 100000 }).click();
   }
   SelectUtility() {
     cy.get(
@@ -78,13 +78,11 @@ class PaymentForm {
   }
   EnterEslip() {
     cy.get('div[class="d-flex justify-content-between mx-0"]').type(
-      2020210002868651
+      "2019MSA1364105F"
     );
   }
   Validate() {
-    cy.get('button[class="bb-load-button btn-primary btn btn-md"]')
-      .eq(1)
-      .click();
+    cy.contains("Validate").click();
   }
   KRANextButton() {
     cy.get('button[class="bb-load-button btn-primary btn btn-md"]')

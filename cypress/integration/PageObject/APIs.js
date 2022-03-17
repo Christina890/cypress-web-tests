@@ -8,7 +8,7 @@ class API {
   TransactionListing() {
     cy.route(
       "GET",
-      "https://uat-dxp.imbank.com/api/transaction-presentation-service/client-api/v2/transactions?arrangementId=8a808b3079f5f9b2017a61a1f48d010c"
+      "https://uat-dxp.imbank.com/api/transaction-presentation-service/client-api/v2/transactions?arrangementId=8a8095c979afcd7c0179afe3f1610001"
     ).as("Transactions");
   }
   PaymentOrder() {
@@ -26,7 +26,7 @@ class API {
   Eslip() {
     cy.route(
       "GET",
-      "api/omni-integration-service/client-api/v1/eslip-query?referenceNumber=2020200000003156"
+      "/api/omni-integration-service/client-api/v1/eslip-query?referenceNumber=2019MSA1364105F"
     ).as("eslip");
   }
   BulkApproval() {

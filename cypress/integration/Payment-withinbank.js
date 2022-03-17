@@ -40,6 +40,7 @@ describe("RTGS Payment", function () {
     cy.server();
     API.PaymentOrder();
     paymentForm.SubmitPayment();
+    cy.wait(["@route1"], { responseTimeout: 200000 });
     paymentForm.PaymentResponse();
     paymentForm.SubmitPayment();
   });

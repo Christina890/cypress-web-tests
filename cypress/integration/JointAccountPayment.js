@@ -3,7 +3,7 @@ import APIs from "./PageObject/APIs";
 import Navigation from "./PageObject/Navigation";
 import PaymentForm from "./PageObject/PaymentForm";
 
-describe("Pesalink to Account", function () {
+describe("Joint Account Payments", function () {
   beforeEach(function () {
     cy.fixture("Login").then((Login) => {
       this.Login = Login;

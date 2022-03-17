@@ -34,7 +34,7 @@ describe("Paybill Payments ", function () {
     paymentForm.PaybillAmount();
     cy.server();
     API.MpesaOrganizationQuery();
-    paymentForm.KRANextButton();
+    paymentForm.NextButton();
     cy.wait(["@MpesaQuery"], { responseTimeout: 100000 });
     //cy.wait(15000)
     cy.server();

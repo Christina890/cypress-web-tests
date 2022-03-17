@@ -37,6 +37,7 @@ describe("Airtime Purchase to Other", function () {
     API.PaymentOrder();
     paymentForm.SubmitPayment();
     paymentForm.PaymentResponse();
+    cy.wait(["@route1"], { responseTimeout: 200000 });
     paymentForm.AssertSuccess();
   });
 });
