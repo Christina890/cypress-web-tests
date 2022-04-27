@@ -39,7 +39,7 @@ describe("Paybill Payments ", function () {
     //cy.wait(15000)
     cy.server();
     API.PaymentOrder();
-    paymentForm.SubmitPayment;
+    paymentForm.SubmitPayment();
     cy.wait(["@route1"], { responseTimeout: 200000 });
     paymentForm.AssertSuccess();
   });

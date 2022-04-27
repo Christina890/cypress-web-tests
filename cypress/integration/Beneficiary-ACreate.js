@@ -13,7 +13,7 @@ describe("Create a new beneficiary", function () {
       this.url = url;
     });
   });
-  it("User should be logged in successfully", function () {
+  it("Beneficiary should be created successfully", function () {
     const login = new LoginPage();
     const navigation = new Navigation();
     const api = new APIs();

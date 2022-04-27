@@ -47,6 +47,6 @@ describe("Create an SI", function () {
     API.PaymentOrder();
     paymentForm.SubmitPayment();
     cy.wait(["@route1"], { responseTimeout: 200000 });
-    SI.AssertSuccess();
+    paymentForm.AssertSuccess();
   });
 });

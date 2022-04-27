@@ -41,7 +41,6 @@ describe("Pesalink to Account", function () {
     API.PaymentOrder();
     paymentForm.SubmitPayment();
     cy.wait(["@route1"], { responseTimeout: 200000 });
-    paymentForm.PaymentResponse();
     paymentForm.AssertSuccess();
   });
 });

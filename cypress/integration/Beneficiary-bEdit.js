@@ -21,6 +21,7 @@ describe("Edit Beneficiary", function () {
       return false;
     });
     login.navigate();
+    cy.wait(100);
     login.enterUsername(this.Login.userName);
     login.enterPassword(this.Login.password);
     login.submit();
