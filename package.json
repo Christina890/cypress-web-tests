@@ -9,7 +9,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "node_modules/.bin/cypress run"
+    "runtest": "./node_modules/.bin/cypress run",
+    "opencypress": "./node_modules/.bin/cypress open"
   },
   "repository": {
     "type": "git",
