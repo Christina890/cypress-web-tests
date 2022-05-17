@@ -1,6 +1,6 @@
 import LoginPage from "./PageObject/LoginPage";
 import PageNavigation from "./PageObject/Navigation";
-describe("Open Retail Omni web", function () {
+describe("Login", function () {
   beforeEach(function () {
     cy.fixture("Login").then((Login) => {
       this.Login = Login;
