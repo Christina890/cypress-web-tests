@@ -26,7 +26,7 @@ describe("Get Recent Transactions", function () {
     login.submit();
     navigation.selectSA();
     navigation.selectAccount();
-    cy.contains("00101748915010").click();
+    cy.contains("**********").click();
     cy.wait("@Transactions", { timeout: 100000 })
       .its("status")
       .should("eq", 200);
