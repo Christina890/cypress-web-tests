@@ -25,7 +25,7 @@ describe("SI list ", function () {
     cy.server();
     cy.route(
       "GET",
-      "/api/omni-integration-service/client-api/v1/standing-order-summary-query?size=1000&custId=0174891&from=0"
+      "/api/omni-integration-service/client-api/v1/standing-order-summary-query?size=1000&custId=******&from=0"
     ).as("SI");
     cy.contains("Standing Orders").click();
     cy.wait("@SI", { responseTimeout: 100000 }).its("status").should("eq", 200);
