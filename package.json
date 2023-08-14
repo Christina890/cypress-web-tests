@@ -1,5 +1,5 @@
 {
-  "name": "omni-automation-retail",
+  "name": "************",
   "version": "1.0.0",
   "description": "E2E web tests",
   "main": "index.js",
@@ -14,12 +14,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/inmdigitalfactory/omni-automation-retail.git"
+    "url": "*************"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/inmdigitalfactory/omni-automation-retail/issues"
+    "url": "********"
   },
-  "homepage": "https://github.com/inmdigitalfactory/omni-automation-retail#readme"
+  "homepage": "**********"
 }
